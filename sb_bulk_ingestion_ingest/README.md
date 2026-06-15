@@ -78,9 +78,8 @@ The deployment will output:
       |
     DynamoDB(DRYRUN/COMMIT)
       |
-  Ingest Pipeline .
+  Ingest Pipeline (ingest logic)
       |
-     ZOHO .
+     ZOHO (stub/real)
       |
-      S3 .
-##end
+      S3(csv file)
