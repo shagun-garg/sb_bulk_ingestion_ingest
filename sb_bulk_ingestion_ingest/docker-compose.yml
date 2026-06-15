@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    environment:
+      - ENVIRONMENT=local
+      - DYNAMODB_TABLE_JOBS=BulkJobs
+      - DYNAMODB_TABLE_AUDIT=AuditLog
+      - S3_BUCKET_NAME=bulk-ingestion-digest
+      - DYNAMODB_ENDPOINT_URL=http://dynamodb-local:8000
+      - S3_ENDPOINT_URL=http://moto-s3:5000
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=mock
+      - AWS_SECRET_ACCESS_KEY=mock
+      - JWT_SECRET=super-secret-skybridge-session-key-2026
+      - API_KEYS=skybridge-key-operator-1234,skybridge-key-viewer-5678
+      - CURSOR_SIGNING_SECRET=cursor-token-signing-secret-key-2026
+    depends_on:
+      - dynamodb-local
+      - moto-s3
+
+  dynamodb-local:
+    image: amazon/dynamodb-local:2.5.2
+    platform: linux/amd64
+    ports:
+      - "8000:8000"
+    command: "-jar DynamoDBLocal.jar -sharedDb -inMemory"
+    user: root
+
+  moto-s3:
+    image: ghcr.io/getmoto/motoserver:latest
+    platform: linux/amd64
+    ports:
+      - "5000:5000"
+    environment:
+      - MOTO_PORT=5000
