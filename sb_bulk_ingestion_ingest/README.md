@@ -78,8 +78,9 @@ The deployment will output:
       |
     DynamoDB(DRYRUN/COMMIT)
       |
-  Ingest Pipeline
+  Ingest Pipeline .
       |
-     ZOHO
+     ZOHO .
       |
-      S3
+      S3 .
+##end
