@@ -67,3 +67,19 @@ The deployment will output:
 - `dynamodb_table_jobs_name`: Table storing jobs metadata.
 - `dynamodb_table_audit_name`: Table storing the audit logs.
 - `s3_bucket_name`: S3 Bucket storing digests.
+
+
+
+#### ACHITECTURE 
+
+    Client
+      |
+    FastAPI(LAMBDA) -> VALIDATION
+      |
+    DynamoDB(DRYRUN/COMMIT)
+      |
+  Ingest Pipeline (ingest logic)
+      |
+     ZOHO (stub/real)
+      |
+      S3(csv file)
