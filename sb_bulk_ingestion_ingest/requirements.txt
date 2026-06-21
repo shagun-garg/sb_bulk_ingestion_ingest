@@ -10,3 +10,4 @@ pytest-mock>=3.12.0
 httpx>=0.27.0
 moto[server,s3,dynamodb]>=5.0.0
 python-multipart>=0.0.9
+python-dotenv>=1.0.0
