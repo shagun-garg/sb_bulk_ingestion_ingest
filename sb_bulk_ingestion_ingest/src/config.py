@@ -42,9 +42,12 @@ if SSM_JWT_PARAM or SSM_API_KEYS_PARAM:
             API_KEYS_RAW = res["Parameter"]["Value"]
             API_KEYS = [k.strip() for k in API_KEYS_RAW.split(",") if k.strip()]
             for key in API_KEYS:
-                if "operator" in key.lower() or "admin" in key.lower():
+                if "operator" in key.lower():
                     API_KEY_ROLES[key] = "operator"
                     API_KEY_LABELS[key] = "operator-ssm-api-key"
+                elif "admin" in key.lower():
+                    API_KEY_ROLES[key] = "admin"
+                    API_KEY_LABELS[key] = "admin-ssm-api-key"
                 else:
                     API_KEY_ROLES[key] = "viewer"
                     API_KEY_LABELS[key] = "viewer-ssm-api-key"
